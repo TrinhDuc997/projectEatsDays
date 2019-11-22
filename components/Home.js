@@ -7,6 +7,7 @@ import {
     Text,
     StatusBar,
     Image,
+    ImageBackground,
     FlatList,
     TextInput,
     TouchableOpacity,
@@ -18,37 +19,26 @@ import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TE
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-
-class FlatListItem extends Component {
-    render() {
-        return (
-            <View style={{ flex: 1, flexDirection:'row' }}>
-                <View style={{width: 50, height: 50 }}>
-                    <TouchableOpacity>
-                        <Text style={{ color: 'black',}}>
-                            {this.props.item.name}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
-    }
-}
-
 export default class abc extends Component {
     render() {
         return (
             <View style={style.homeContainer}>
                 <View style={style.homeHead}>
-                    <Image style={style.imgHomeHead}
+                    {/* <Image style={style.imgHomeHead }
                         source={{ uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg' }}>
-                    </Image>
-                </View>
+                    </Image> */}
+                    
+                    <ImageBackground source={{uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg'}} style={{width:'100%',height:'100%'}}>
+                        <TouchableOpacity>
+                        <Text style={{textAlign:'center', color:'red', fontSize:20,fontWeight:'bold'}}>Xem tất cả món ăn</Text></TouchableOpacity>
+                    </ImageBackground>
+                    
+            </View>
                 <View style={style.homeUp}>
                     <Text style={style.txtTitle}>Loại món ăn</Text>
-                    <FlatList style={style.flatList} data={datalist}
+                    {/* <FlatList style={style.flatList}
+                        data={datalist}
                         renderItem={({ item, index }) => {
-                            // console.log('Item = {JSON.stringify(item)}, index= ${Home}');
                             return (
                                 <FlatListItem item={item} index={index} >
 
@@ -57,7 +47,7 @@ export default class abc extends Component {
                         }
                         }
                     >
-                    </FlatList>
+                    </FlatList> */}
 
                 </View>
                 <View style={style.homeCenter}>
@@ -87,8 +77,8 @@ const style = StyleSheet.create({
     },
     homeHead: {
         flex: 3,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        justifyContent: 'center',
         alignContent: 'center',
     },
     imgHomeHead: {

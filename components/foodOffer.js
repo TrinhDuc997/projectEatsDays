@@ -13,12 +13,12 @@ import {
 import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
 
 const numColumns = 5;
-export default class foodDay extends Component {
+export default class foodOffer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            monAn: []
+            loaiMonAn: []
 
         }
     }
@@ -35,7 +35,7 @@ export default class foodDay extends Component {
 
         )
     }
-//get API Mon an
+// get API loai mon an
     componentDidMount() {
         fetch('http://10.0.2.2:5000/api')
             .then((response) => response.json())
@@ -53,12 +53,12 @@ export default class foodDay extends Component {
 
     render() {
         return (
-            <View style={style.homDown}>
+            <View style={style.homeUp}>
                 <FlatList style={style.flatList}
-                    data={this.state.monAn}
+                    data={this.state.loaiMonAn}
                     renderItem={this.renderItem}
                     numColumns={numColumns}
-                    keyExtractor={({ MaMonAn }, index) => MaMonAn}
+                    keyExtractor={({ MaLoai }, index) => MaLoai}
                 />
             </View>
         )
@@ -66,11 +66,11 @@ export default class foodDay extends Component {
 }
 
 const style = StyleSheet.create({
-    homeDown: {
+    homeUp: {
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
-        backgroundColor: COLOR_ORANGE
-    }
+        backgroundColor: COLOR_LIGHT_GREEN
+    },
 })
