@@ -26,13 +26,11 @@
     } from './color/colors';
     import FoodOffer from './FoodOffer'
     import FoodDay from './FoodDay'
-    import Icon from 'react-native-vector-icons/FontAwesome';
+    // import Icon from 'react-native-vector-icons/FontAwesome';
     import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
-    
-import datalist from '../data/datalist'
-import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import TabBuaAn from '../components/TabBuaAn';
+    // import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
+    import Icon from 'react-native-vector-icons/FontAwesome';
+    import TabBuaAn from '../components/TabBuaAn';
 
     export default class abc extends Component {
         constructor(props) {
@@ -80,7 +78,7 @@ import TabBuaAn from '../components/TabBuaAn';
                     fontSize: 20,
                     fontWeight: 'bold',
                     // backgroundColor:COLOR_ORANGE
-                    }}>
+                    }}> 
                     Xem tất cả món ăn
                 </Text>
                 
@@ -99,11 +97,8 @@ import TabBuaAn from '../components/TabBuaAn';
                 Món ăn gợi ý
             </Text>
                 <TabBuaAn></TabBuaAn>
-                </View>
-                <View style={style.homeDown}>
-                    <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
-                </View>
             </View>
+             
             <View style={style.homeDown}>
             <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
             <FoodDay
