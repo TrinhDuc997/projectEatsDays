@@ -49,13 +49,31 @@ var  executeQuery = function(res, query){
     });             
 }
 //GET API
-app.get("/api", function(req , res){
-    console.log("check req in getAPI:",req.query)
+app.get("/getLoaiMonAn", function(req , res){
     var query = "select * from LoaiMonAn";
     executeQuery (res, query);
 });
+//login API
 app.post("/login", function(req , res){
     const reqData = req.body.data
     var query = `select * from NguoiDung where Taikhoan = '${reqData.email}' and Matkhau = '${reqData.pass}' `;
+    executeQuery (res, query);
+});
+// API get good food every day
+app.get("/goodFoodDays", function(req , res){
+    var query = "select * from monan";
+    executeQuery (res, query);
+});
+//API creat new meal
+app.get("/newMeal", function(req , res){
+    var query = `exec BuaSangTheoNgay
+                exec BuaTruaTheoNgay
+                exec BuaToiTheoNgay`;
+    executeQuery (res, query);
+});
+// API get dish suggestions
+app.get("/getDishSuggestions", function(req , res){
+    var query = `select * from ThongTinBuaAn 
+                    where ngay = (SELECT CONVERT(VARCHAR(10), getdate(), 111))`;
     executeQuery (res, query);
 });

@@ -13,13 +13,12 @@ import {
 import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
 
 const numColumns = 5;
-export default class foodDay extends Component {
+export default class FoodDay extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             monAn: []
-
         }
     }
 /**this item view */
@@ -29,33 +28,20 @@ export default class foodDay extends Component {
                 <TouchableOpacity>
                     <Image style={{ width: 50, height: 50, borderRadius: 50 / 2, borderColor: 'red', margin: 5 }}
                         source={{ uri: item.Hinh }} />
-                    <Text>{item.TenLoai}</Text>
+                    <Text>{item.TenMonAn}</Text>
                 </TouchableOpacity>
             </View>
 
         )
     }
-//get API Mon an
-    componentDidMount() {
-        fetch('http://10.0.2.2:5000/api')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    data: responseJson.recordsets
-
-                });
-                console.log("check data abc:", responseJson)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     render() {
+        const {
+        goodFoodDays = []
+        } = this.props
         return (
             <View style={style.homDown}>
                 <FlatList style={style.flatList}
-                    data={this.state.monAn}
+                    data={goodFoodDays}
                     renderItem={this.renderItem}
                     numColumns={numColumns}
                     keyExtractor={({ MaMonAn }, index) => MaMonAn}

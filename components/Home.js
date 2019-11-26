@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {
+    import React, {Component} from 'react';
+    import {
     SafeAreaView,
     StyleSheet,
     ScrollView,
@@ -12,68 +12,106 @@ import {
     TextInput,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard, navigation, navigate
-} from 'react-native';
-import datalist from '../data/datalist'
-import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
+    Keyboard,
+    navigation,
+    navigate,
+    } from 'react-native';
+    import datalist from '../data/datalist';
+    import {
+    COLOR_ORANGE,
+    COLOR_LIGHT_GREEN,
+    COLOR_LIGHT_PINK,
+    COLOR_FACE,
+    COLOR_TEXT,
+    } from './color/colors';
+    import FoodOffer from './FoodOffer'
+    import FoodDay from './FoodDay'
+    import Icon from 'react-native-vector-icons/FontAwesome';
+    import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
 
-
-export default class abc extends Component {
+    export default class abc extends Component {
+        constructor(props) {
+        super(props);
+        this.state = {
+            loaiMonAn: []
+        }
+    }
+        async componentDidMount() {
+        const loaiMonAn = await apiGetData();
+        const goodFoodDays = await apiGetGoodFoodDays();
+        let dishSuggestions = []
+        dishSuggestions = await apiGetDishSuggestions() || [];
+        if(dishSuggestions.length === 0){
+            await apiCrateNewMeal();
+            dishSuggestions = await apiGetDishSuggestions();
+            console.log("check dishSuggestions:",dishSuggestions)
+        }
+        console.log("checkgoodFoodDays:",dishSuggestions)
+        this.setState({
+            loaiMonAn,
+            goodFoodDays,
+            dishSuggestions,
+        })
+    }
     render() {
         return (
-            <View style={style.homeContainer}>
-                <View style={style.homeHead}>
-                    {/* <Image style={style.imgHomeHead }
-                        source={{ uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg' }}>
-                    </Image> */}
-                    
-                    <ImageBackground source={{uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg'}} style={{width:'100%',height:'100%'}}>
-                        <TouchableOpacity>
-                        <Text style={{textAlign:'center', color:'red', fontSize:20,fontWeight:'bold'}}>Xem tất cả món ăn</Text></TouchableOpacity>
-                    </ImageBackground>
-                    
-            </View>
-                <View style={style.homeUp}>
-                    <Text style={style.txtTitle}>Loại món ăn</Text>
-                    {/* <FlatList style={style.flatList}
-                        data={datalist}
-                        renderItem={({ item, index }) => {
-                            return (
-                                <FlatListItem item={item} index={index} >
-
-                                </FlatListItem>
-                            );
-                        }
-                        }
-                    >
-                    </FlatList> */}
-
-                </View>
-                <View style={style.homeCenter}>
-
-                    <Text style={style.txtTitle}>
-                        <Icon name='cutlery' color={COLOR_ORANGE} size={40} style={style.icon}></Icon>
-                        Món ăn gợi ý
+        <View style={style.homeContainer}>
+            <View style={style.homeHead}>
+            {/* <Image style={style.imgHomeHead }
+                            source={{ uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg' }}>
+                        </Image> */}
+ <TouchableOpacity>
+            <ImageBackground
+                source={{
+                uri:
+                    'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg',
+                }}
+                style={{width: '100%', height: '100%'}}>
+               
+                <Text
+                    style={{
+                    textAlign: 'center',
+                    color: 'black',
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    // backgroundColor:COLOR_ORANGE
+                    }}>
+                    Xem tất cả món ăn
                 </Text>
-                </View>
-                <View style={style.homeDown}>
-                    <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
-                </View>
+                
+            </ImageBackground>
+            </TouchableOpacity>
             </View>
-        )
+            <View style={style.homeUp}>
+            <Text style={style.txtTitle}>Loại món ăn</Text>
+            <FoodOffer
+                loaiMonAn={this.state.loaiMonAn}
+            >
+            </FoodOffer>
+            </View>
+            <View style={style.homeCenter}>
+            <Text style={style.txtTitle}>
+                Món ăn gợi ý
+            </Text>
+            </View>
+            <View style={style.homeDown}>
+            <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
+            <FoodDay
+            goodFoodDays={this.state.goodFoodDays}
+            >
+            </FoodDay>
+            </View>
+        </View>
+        );
+    }
     }
 
-}
-
-
-
-const style = StyleSheet.create({
+    const style = StyleSheet.create({
     homeContainer: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignContent: 'center'
+        alignContent: 'center',
     },
     homeHead: {
         flex: 3,
@@ -83,40 +121,39 @@ const style = StyleSheet.create({
     },
     imgHomeHead: {
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     homeUp: {
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
-        backgroundColor: COLOR_LIGHT_GREEN
     },
     flatList: {
-        flex:1,
-        
+        flex: 1,
     },
     homeCenter: {
         flex: 3,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
-        backgroundColor: COLOR_LIGHT_PINK
+        // backgroundColor: COLOR_LIGHT_PINK,
     },
     icon: {
         marginLeft: 10,
     },
     txtTitle: {
         fontSize: 23,
-        color: 'white',
-        marginLeft: 5,
-        fontWeight: 'bold'
+        color: 'black',
+        paddingLeft:5,
+        fontWeight: 'bold',
+        backgroundColor: COLOR_ORANGE,
     },
     homeDown: {
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
-        backgroundColor: COLOR_ORANGE
-    }
-})
+        // backgroundColor: COLOR_ORANGE,
+    },
+    });

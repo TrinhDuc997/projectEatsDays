@@ -1,13 +1,17 @@
 
-export const apiGetData = (req) => {
-    return fetch(`http://10.0.2.2:5000/api?data=${JSON.stringify(req)}`)
-      .then((response) => response.json())
+export const apiGetData = async (req) => {
+    let res = {}
+    await fetch(`http://10.0.2.2:5000/getLoaiMonAn`)
+      .then((response) => {
+          return response.json()
+        })
       .then((responseJson) => {
-        return responseJson.recordset
+        res = responseJson.recordset
       })
       .catch((error) =>{
         console.error(error);
       });
+      return res
 }
 
 export const apiLogin = async  (req) => {
@@ -35,4 +39,42 @@ export const apiLogin = async  (req) => {
         console.error(error);
       });
       return resData.recordset
+}
+export const apiGetGoodFoodDays = async (req) => {
+  let res = {}
+    await fetch(`http://10.0.2.2:5000/goodFoodDays`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        res =  responseJson.recordset
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+      return res
+}
+//API creat new meal 
+export const apiCrateNewMeal = async (req) => {
+  let res = {}
+    await fetch(`http://10.0.2.2:5000/newMeal`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+}
+// API get dish suggestions
+export const apiGetDishSuggestions = async (req) => {
+    let res = {}
+    await fetch(`http://10.0.2.2:5000/getDishSuggestions`)
+      .then((response) => {
+          return response.json()
+        })
+      .then((responseJson) => {
+        res = responseJson.recordset
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+      return res
 }
