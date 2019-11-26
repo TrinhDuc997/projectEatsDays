@@ -17,6 +17,7 @@ import {
 import datalist from '../data/datalist'
 import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TabBuaAn from '../components/TabBuaAn';
 
 
 export default class abc extends Component {
@@ -56,6 +57,7 @@ export default class abc extends Component {
                         <Icon name='cutlery' color={COLOR_ORANGE} size={40} style={style.icon}></Icon>
                         Món ăn gợi ý
                 </Text>
+                <TabBuaAn></TabBuaAn>
                 </View>
                 <View style={style.homeDown}>
                     <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
