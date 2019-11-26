@@ -28,6 +28,11 @@
     import FoodDay from './FoodDay'
     import Icon from 'react-native-vector-icons/FontAwesome';
     import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
+    
+import datalist from '../data/datalist'
+import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import TabBuaAn from '../components/TabBuaAn';
 
     export default class abc extends Component {
         constructor(props) {
@@ -93,6 +98,11 @@
             <Text style={style.txtTitle}>
                 Món ăn gợi ý
             </Text>
+                <TabBuaAn></TabBuaAn>
+                </View>
+                <View style={style.homeDown}>
+                    <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
+                </View>
             </View>
             <View style={style.homeDown}>
             <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
