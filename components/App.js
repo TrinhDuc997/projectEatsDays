@@ -8,7 +8,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './Login';
 import index from './index';
 import Home from './Home';
-// import ViewDish from './ViewDish';
+import ViewWish from './ViewWish';
+import DetailWish from './DetailWish';
 const App = createStackNavigator({
   //screnn
   // Login: {
@@ -20,9 +21,12 @@ const App = createStackNavigator({
   Home: {
     screen: Home
   },
-  // ViewDish:{
-  //   screen: ViewDish
-  // },
+  ViewWish:{
+    screen: ViewWish
+  },
+  DetailWish:{
+    screen: DetailWish
+  },
 }, {
   //setting
   initialRouteName: 'index'

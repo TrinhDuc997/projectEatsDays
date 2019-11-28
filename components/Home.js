@@ -33,6 +33,12 @@
     import TabBuaAn from '../components/TabBuaAn';
 
     export default class abc extends Component {
+
+        static navigationOptions ={
+            header:null,
+        }
+    
+
         constructor(props) {
         super(props);
         this.state = {
@@ -63,14 +69,14 @@
             {/* <Image style={style.imgHomeHead }
                             source={{ uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg' }}>
                         </Image> */}
- <TouchableOpacity>
+
             <ImageBackground
                 source={{
                 uri:
                     'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg',
                 }}
                 style={{width: '100%', height: '100%'}}>
-               
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('ViewWish')}>
                 <Text
                     style={{
                     textAlign: 'center',
@@ -81,9 +87,9 @@
                     }}> 
                     Xem tất cả món ăn
                 </Text>
-                
+                </TouchableOpacity>
             </ImageBackground>
-            </TouchableOpacity>
+           
             </View>
             <View style={style.homeUp}>
             <Text style={style.txtTitle}>Loại món ăn</Text>
