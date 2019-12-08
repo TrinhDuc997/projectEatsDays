@@ -8,9 +8,12 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  Dimensions,
+  ImageBackground,
 } from 'react-native';
 import {
-    apiGetDishSession} from '../API'
+    apiGetDishSession} from '../API';
+    const numColumns = 2;
 
 export default class TabBuaToi extends Component{
   constructor(props) {
@@ -28,14 +31,14 @@ export default class TabBuaToi extends Component{
     }
     renderItem = ({ item }) => {
         return (
-            <View style={{ alignContent: 'center', flex: 1 }}>
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('DetailWish',{item})}>
-                    <Image style={{ width: 50, height: 50, borderRadius: 50 / 2, borderColor: 'red', margin: 5 }}
-                        source={{ uri: item.Hinh }} />
-                    <Text>{item.TenMonAn}</Text>
-                </TouchableOpacity>
-            </View>
-
+          <View style={style.itemFlastList}>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('DetailWish',{item})}>
+              <ImageBackground style={style.imgBackground}
+                  source={{ uri: item.Hinh }} >
+              <Text style={[style.txtFlastList, style.itemInvisible]}>{item.TenMonAn}</Text>
+              </ImageBackground>
+          </TouchableOpacity>
+      </View>
         )
     }
     render(){
@@ -49,16 +52,43 @@ export default class TabBuaToi extends Component{
         ]}
       })
       return(
-        <View style={{backgroundColor:'green',flex:1}}>
-          <View>
-          <FlatList
+        <FlatList style={style.flatList}
             data={convertDishSession}
             renderItem={this.renderItem}
-            numColumns={4}
+            numColumns={numColumns}
+            keyExtractor={({ MaMonAn }, index) => MaMonAn}
           ></FlatList>
-          </View>
-        </View>
       )
     }
   }
   
+  const style = StyleSheet.create({
+    flatList:{
+        flex: 1,
+     
+    },
+    itemFlastList:{
+        justifyContent: 'flex-end',
+        marginTop:5,
+        marginRight:5,
+        marginBottom:5,
+        height: Dimensions.get('window').width / numColumns+2, // approximate a square
+        alignContent:'center',
+       
+    },
+    imgBackground:{ 
+        width: Dimensions.get('window').width / numColumns, // approximate a square
+        height: Dimensions.get('window').width / numColumns, // approximate a square
+
+
+    },
+    txtFlastList:{
+        backgroundColor:'rgba(82, 146, 146, 0.9)',
+        fontSize:20,
+        alignContent:'flex-end',
+        fontWeight: 'bold',
+    },
+    // itemInvisible:{
+    //     backgroundColor: 'transparent',
+    // },
+})
