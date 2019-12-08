@@ -1,5 +1,5 @@
-    import React, {Component} from 'react';
-    import {
+import React, { Component } from 'react';
+import {
     SafeAreaView,
     StyleSheet,
     ScrollView,
@@ -14,10 +14,12 @@
     TouchableWithoutFeedback,
     Keyboard,
     navigation,
-    navigate,
-    } from 'react-native';
-    import datalist from '../data/datalist';
-    import {
+    navigate,Dimensions,
+    
+} from 'react-native';
+import VerticalViewPager  from '@react-native-community/viewpager';
+import datalist from '../data/datalist';
+import {
     COLOR_ORANGE,
     COLOR_LIGHT_GREEN,
     COLOR_LIGHT_PINK,
@@ -35,26 +37,26 @@
     // import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
     import Icon from 'react-native-vector-icons/FontAwesome';
     import TabBuaAn from '../components/TabBuaAn';
+    import ViewPagerAndroid from '@react-native-community/viewpager';
+export default class abc extends Component {
 
-    export default class abc extends Component {
+    // static navigationOptions = {
+    //     header: null,
+    // }
 
-        static navigationOptions ={
-            header:null,
-        }
-    
 
-        constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             loaiMonAn: []
         }
     }
-        async componentDidMount() {
+    async componentDidMount() {
         const loaiMonAn = await apiGetData();
         const goodFoodDays = await apiGetGoodFoodDays();
         let dishSuggestions = []
         dishSuggestions = await apiGetDishSuggestions() || [];
-        if(dishSuggestions.length === 0){
+        if (dishSuggestions.length === 0) {
             await apiCrateNewMeal();
             dishSuggestions = await apiGetDishSuggestions();
         }
@@ -68,109 +70,118 @@
     render() {
         console.log("check this.props in home:",this.props)
         return (
-        <View style={style.homeContainer}>
-            <View style={style.homeHead}>
-            {/* <Image style={style.imgHomeHead }
+            <ViewPagerAndroid style={style.viewPager} initialPage={0}
+            orientation ={"vertical"}>
+                <View key='1'style={style.viewPagerk1} > 
+                    <View style={style.homeHead}>
+                        {/* <Image style={style.imgHomeHead }
                             source={{ uri: 'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg' }}>
                         </Image> */}
 
-            <ImageBackground
-                source={{
-                uri:
-                    'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg',
-                }}
-                style={{width: '100%', height: '100%'}}>
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('ViewWish')}>
-                <Text
-                    style={{
-                    textAlign: 'center',
-                    color: 'black',
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    // backgroundColor:COLOR_ORANGE
-                    }}> 
-                    Xem tất cả món ăn
-                </Text>
-                </TouchableOpacity>
-            </ImageBackground>
-           
-            </View>
-            <View style={style.homeUp}>
-            <Text style={style.txtTitle}>Loại món ăn</Text>
-            <FoodOffer
-                loaiMonAn={this.state.loaiMonAn}
-            >
-            </FoodOffer>
-            </View>
-            <View style={style.homeCenter}>
-            <Text style={style.txtTitle}>
-                Món ăn gợi ý
-            </Text>
-                <TabBuaAn
-                ></TabBuaAn>
-            </View>
-             
-            <View style={style.homeDown}>
-            <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
-            <FoodDay
-            goodFoodDays={this.state.goodFoodDays}
-            navigation = {this.props.navigation}
-            >
-            </FoodDay>
-            </View>
-        </View>
+                        <ImageBackground style={style.bgHomeHead}
+                            source={{
+                                uri:'https://eurocamp18.com/wp-content/uploads/2016/01/Food-Slide.jpg',}}
+                            >
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ViewWish')}>
+                                <Text
+                                    style={style.txthead}>
+                                    Xem tất cả món ăn
+                                </Text>
+                            </TouchableOpacity>
+                        </ImageBackground>
+
+                    
+                    </View>
+                    
+                    <View style={style.homeUp}>
+                    <Text style={style.txtTitle}>
+                            Món ăn gợi ý
+                        </Text>
+                        <TabBuaAn></TabBuaAn>
+                    </View>
+                </View>  
+                <View key='2'style={style.viewPagerk1}>
+                    <View style={style.homeCenter}>
+                        
+                        <Text style={style.txtTitle}>Loại món ăn</Text>
+                        <FoodOffer
+                            loaiMonAn={this.state.loaiMonAn}
+                        >
+                        </FoodOffer>
+                    </View>
+
+                    <View style={style.homeDown}>
+                        <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
+                        <FoodDay
+                            goodFoodDays={this.state.goodFoodDays}
+                        >
+                        </FoodDay>
+                    
+                    </View>
+                </View>
+            </ViewPagerAndroid>
         );
     }
-    }
+}
 
-    const style = StyleSheet.create({
-    homeContainer: {
+
+
+const style = StyleSheet.create({
+
+
+    viewPager:{
+        flex:1
+    },
+    viewPagerk1: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
+        backgroundColor: '#C8D3D5'
     },
     homeHead: {
         flex: 3,
-        flexDirection: 'row',
+        flexDirection: 'column-reverse',
         justifyContent: 'center',
         alignContent: 'center',
     },
-    imgHomeHead: {
-        width: '100%',
-        height: '100%',
+    txthead:{
+            justifyContent:'flex-end',
+            textAlign: 'center',
+            color: 'black',
+            fontSize: 20,
+            fontWeight: 'bold',
+            backgroundColor:'rgba(82, 146, 146, 0.9)',
+    },
+    bgHomeHead:{
+        width: '100%', 
+        height: '100%' 
     },
     homeUp: {
-        flex: 2,
+        flex: 7,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
     },
-    flatList: {
-        flex: 1,
-    },
     homeCenter: {
-        flex: 3,
+        flex: 4,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
         // backgroundColor: COLOR_LIGHT_PINK,
     },
-    icon: {
-        marginLeft: 10,
-    },
     txtTitle: {
-        fontSize: 23,
+        fontSize: 18,
         color: 'black',
-        paddingLeft:5,
+        paddingLeft: 5,
         fontWeight: 'bold',
-        backgroundColor: COLOR_ORANGE,
+
     },
     homeDown: {
-        flex: 2,
+        flex: 6,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
         // backgroundColor: COLOR_ORANGE,
     },
-    });
+});
