@@ -18,7 +18,7 @@ export default createAppContainer(
     {
       BuaSang,
       BuaTrua,
-      BuaToi,
+      BuaToi
     },
     {
       initialRouteName: 'BuaSang',
