@@ -10,6 +10,7 @@ import {
 
 export default class TabBuaSang extends Component{
     render(){
+      console.log("check props:",this.props)
       return(
         <View style={{backgroundColor:'red',flex:1}}>
           <Text>

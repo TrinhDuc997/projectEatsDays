@@ -16,9 +16,9 @@ import BuaToi from '../components/BuaToi';
 export default createAppContainer(
   createMaterialTopTabNavigator (
     {
-      BuaSang: { screen: BuaSang },
-      BuaTrua: { screen: BuaTrua },
-      BuaToi: { screen: BuaToi },
+      BuaSang,
+      BuaTrua,
+      BuaToi
     },
     {
       initialRouteName: 'BuaSang',

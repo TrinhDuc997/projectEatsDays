@@ -10,6 +10,7 @@ import {
 
 export default class TabBuaTrua extends Component{
     render(){
+      console.log("check props:",this.props)
       return(
         <View style={{backgroundColor:'yellow',flex:1}}>
           <Text>
