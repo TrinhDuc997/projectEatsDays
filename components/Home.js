@@ -27,7 +27,11 @@
     import FoodOffer from './FoodOffer'
     import FoodDay from './FoodDay'
     // import Icon from 'react-native-vector-icons/FontAwesome';
-    import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
+    import {apiGetData,
+    apiGetGoodFoodDays,
+    apiGetDishSuggestions,
+    apiCrateNewMeal,
+    } from '../API'
     // import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
     import Icon from 'react-native-vector-icons/FontAwesome';
     import TabBuaAn from '../components/TabBuaAn';
@@ -53,16 +57,16 @@
         if(dishSuggestions.length === 0){
             await apiCrateNewMeal();
             dishSuggestions = await apiGetDishSuggestions();
-            console.log("check dishSuggestions:",dishSuggestions)
         }
-        console.log("checkgoodFoodDays:",dishSuggestions)
         this.setState({
             loaiMonAn,
             goodFoodDays,
             dishSuggestions,
         })
+        apiGetDishSession
     }
     render() {
+        console.log("check this.props in home:",this.props)
         return (
         <View style={style.homeContainer}>
             <View style={style.homeHead}>
@@ -102,13 +106,15 @@
             <Text style={style.txtTitle}>
                 Món ăn gợi ý
             </Text>
-                <TabBuaAn></TabBuaAn>
+                <TabBuaAn
+                ></TabBuaAn>
             </View>
              
             <View style={style.homeDown}>
             <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
             <FoodDay
             goodFoodDays={this.state.goodFoodDays}
+            navigation = {this.props.navigation}
             >
             </FoodDay>
             </View>

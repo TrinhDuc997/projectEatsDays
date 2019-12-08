@@ -8,7 +8,8 @@ import {
     Image,
     FlatList,
     TouchableOpacity,
-
+    navigation,
+    navigate,
 } from 'react-native';
 import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
 const numColumns = 5;
@@ -17,7 +18,7 @@ export default class FoodOffer extends Component {
     renderItem = ({ item }) => {
         return (
             <View style={{ alignContent: 'center', flex: 1 }}>
-                <TouchableOpacity>
+                <TouchableOpacity /*onPress={()=> this.props.navigation.navigate('DetailWish',{item})}*/>
                     <Image style={{ width: 50, height: 50, borderRadius: 50 / 2, borderColor: 'red', margin: 5 }}
                         source={{ uri: item.Hinh }} />
                     <Text>{item.TenLoai}</Text>

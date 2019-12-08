@@ -10,6 +10,7 @@ import index from './index';
 import Home from './Home';
 import ViewWish from './ViewWish';
 import DetailWish from './DetailWish';
+import FoodDay from './FoodDay'
 const App = createStackNavigator({
   //screnn
   // Login: {
@@ -26,6 +27,9 @@ const App = createStackNavigator({
   },
   DetailWish:{
     screen: DetailWish
+  },
+  FoodDay:{
+    screen: FoodDay
   },
 }, {
   //setting

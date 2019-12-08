@@ -48,32 +48,39 @@ var  executeQuery = function(res, query){
         });
     });             
 }
-//GET API
+//GET mon an
 app.get("/getLoaiMonAn", function(req , res){
     var query = "select * from LoaiMonAn";
     executeQuery (res, query);
 });
-//login API
+//login
 app.post("/login", function(req , res){
     const reqData = req.body.data
     var query = `select * from NguoiDung where Taikhoan = '${reqData.email}' and Matkhau = '${reqData.pass}' `;
     executeQuery (res, query);
 });
-// API get good food every day
+// get good food every day
 app.get("/goodFoodDays", function(req , res){
     var query = "select * from monan";
     executeQuery (res, query);
 });
-//API creat new meal
+//creat new meal
 app.get("/newMeal", function(req , res){
     var query = `exec BuaSangTheoNgay
                 exec BuaTruaTheoNgay
                 exec BuaToiTheoNgay`;
     executeQuery (res, query);
 });
-// API get dish suggestions
+//get dish suggestions
 app.get("/getDishSuggestions", function(req , res){
     var query = `select * from ThongTinBuaAn 
                     where ngay = (SELECT CONVERT(VARCHAR(10), getdate(), 111))`;
+    executeQuery (res, query);
+});
+//get dish by session
+app.get("/getDishSession", function(req , res){
+    var query = `select * 
+                    from ThongTinBuaAn ,MonAn 
+                        where ThongTinBuaAn.MaMonAn = MonAn.MaMonAn and ngay = (SELECT CONVERT(VARCHAR(10), getdate(), 111))`;
     executeQuery (res, query);
 });

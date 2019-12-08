@@ -78,3 +78,19 @@ export const apiGetDishSuggestions = async (req) => {
       });
       return res
 }
+// API get dish session
+export const apiGetDishSession = async (req) => {
+    let res = {}
+    await fetch(`http://10.0.2.2:5000/getDishSession`)
+      .then((response) => {
+          return response.json()
+        })
+      .then((responseJson) => {
+        res = responseJson.recordset
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+      return res
+}
+

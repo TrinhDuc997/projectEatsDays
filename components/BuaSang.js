@@ -6,17 +6,56 @@ import {
   View,
   Text,FlatList,
   StatusBar,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
-
+import {
+    apiGetDishSession} from '../API'
 export default class TabBuaSang extends Component{
+  constructor(props) {
+        super(props);
+        this.state = {
+            dishSession: []
+        }
+    }
+  async componentDidMount() {
+        let dishSession = []
+        dishSession = await apiGetDishSession()
+        console.log("check dishSession:",dishSession)
+        this.setState({
+          dishSession
+        })
+    }
+    renderItem = ({ item }) => {
+        return (
+            <View style={{ alignContent: 'center', flex: 1 }}>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('DetailWish',{item})}>
+                    <Image style={{ width: 50, height: 50, borderRadius: 50 / 2, borderColor: 'red', margin: 5 }}
+                        source={{ uri: item.Hinh }} />
+                    <Text>{item.TenMonAn}</Text>
+                </TouchableOpacity>
+            </View>
+
+        )
+    }
     render(){
+      const {dishSession} = this.state
+      let convertDishSession = []
+      dishSession.map((item) => {
+        if(item.MaBuaAn === 1){
+          convertDishSession = [
+          ...convertDishSession,
+              item
+        ]}
+      })
       return(
         <View style={{backgroundColor:'red',flex:1}}>
-          <Text>
-            Phunjg nef
-          </Text>
           <View>
-          <FlatList></FlatList>
+          <FlatList
+            data={convertDishSession}
+            renderItem={this.renderItem}
+            numColumns={4}
+          ></FlatList>
           </View>
         </View>
       )

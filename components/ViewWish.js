@@ -11,37 +11,34 @@ import {
     navigation,navigate,navigationOptions
 
 } from 'react-native';
+import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
 export default class viewWish extends Component {
 
      constructor(props) {
         super(props);
         this.state = {
-            datas: []
+            datas: [],
+            goodFoodDays:[]
             }
         }
-
 /**this item view */
     renderItem = ({ item }) => {
         return (
             <View style={{flexDirection:'row', alignContent: 'center', flex: 1 ,marginBottom:3}}>
-                <Image  source={{uri: 'https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/gateway-family/few-off/sian/car_sian.png'}}
+                <Image  source={{uri:item.Hinh}}
                 style={{width:100,height:100,borderRadius:100/2,margin:5}}>
-
                 </Image>
                 <View style={{justifyContent:'center',flex:1}}>
-                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('DetailWish')}>
+                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('DetailWish',{item})}>
                     <Text
                         style={{fontSize:18,marginLeft:5}}
-                    >{item.title}</Text>
+                    >{item.TenMonAn}</Text>
                     <Text ellipsizeMode='tail' numberOfLines={2}>
-                    Rendered in between each item, but not at the top or bottom. By default, highlighted and leadingItem props are provided. renderItem provides separators.highlight/unhighlight which will update the highlighted prop, but you can also add custom props with separators.updateProps.
-                    Rendered in between each item, but not at the top or bottom. By default, highlighted and leadingItem props are provided. renderItem provides separators.highlight/unhighlight which will update the highlighted prop, but you can also add custom props with separators.updateProps.
-
+                        {item.CachNau}
                     </Text>
                 </TouchableOpacity>
                 </View>
             </View>
-
         )
     }
 
@@ -52,28 +49,21 @@ export default class viewWish extends Component {
             ></View>
         )
     }
-
-    componentDidMount(){
-        const url = 'https://facebook.github.io/react-native/movies.json'
-       return fetch(url)
-        .then((response) => response.json())
-        .then((responseJson)=>{
-            this.setState({
-                datas: responseJson.movies
-                
-            })
-            console.log(responseJson)
-        }).catch((er)=>{
-            console.log(er)
+    
+   async componentDidMount(){
+        const goodFoodDays = await apiGetGoodFoodDays();
+        this.setState({
+            goodFoodDays,
         })
     }
     
 
     render() {
+        const { goodFoodDays = [] } = this.state
         return (
             <View style={style.viewWish}>
                 <FlatList style={style.flatList}
-                    data={this.state.datas}
+                    data={goodFoodDays}
                     renderItem={this.renderItem}
                     keyExtractor={({ id }, index) => id}
                     ItemSeparatorComponent={this.renderitemsepar}
