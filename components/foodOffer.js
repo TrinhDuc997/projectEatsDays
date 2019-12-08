@@ -12,7 +12,6 @@ import {
     navigate,
     ImageBackground,
     Dimensions,
-
 } from 'react-native';
 import { COLOR_ORANGE, COLOR_LIGHT_GREEN, COLOR_LIGHT_PINK, COLOR_FACE, COLOR_TEXT } from './color/colors';
 const numColumns = 3;
@@ -31,7 +30,6 @@ export default class FoodOffer extends Component {
 
         )
     }
-// get API loai mon an
 
     render() {
         const {
