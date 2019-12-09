@@ -13,7 +13,22 @@ export const apiGetData = async (req) => {
       });
       return res
 }
-
+export const apiGetDishByCategory = async (req) => {
+  
+  let res = {}
+  await fetch(`http://10.0.2.2:5000/dishByCategory?data=${req}`)
+    .then((response) => {
+        return response.json()
+      })
+    .then((responseJson) => {
+      res = responseJson.recordset
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+    console.log("check res in api:",res)
+    return res
+}
 export const apiLogin = async  (req) => {
     let resData = {}
     await fetch('http://10.0.2.2:5000/login',{

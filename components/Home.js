@@ -95,6 +95,7 @@ export default class abc extends Component {
                         <Text style={style.txtTitle}>Loại món ăn</Text>
                         <FoodOffer
                             loaiMonAn={this.state.loaiMonAn}
+                            navigation = {this.props.navigation}
                         >
                         </FoodOffer>
                     </View>

@@ -53,6 +53,11 @@ app.get("/getLoaiMonAn", function(req , res){
     var query = "select * from LoaiMonAn";
     executeQuery (res, query);
 });
+// get take dish by category
+app.get("/dishByCategory",function(req,res){
+    var query = `select * from monan where maloai = '${req.query.data}'`;
+    executeQuery (res, query);
+});
 //login
 app.post("/login", function(req , res){
     const reqData = req.body.data

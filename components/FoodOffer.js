@@ -18,9 +18,10 @@ const numColumns = 3;
 export default class FoodOffer extends Component {
 /**this item view */
     renderItem = ({ item }) => {
+        const {navigation} = this.props
         return (
             <View style={style.itemFlastList}>
-                <TouchableOpacity /*onPress={()=> this.props.navigation.navigate('DetailWish',{item})}*/>
+                <TouchableOpacity onPress={()=> navigation.navigate('ViewWish',item)}>
                     <ImageBackground style={style.imgBackground}
                         source={{ uri: item.Hinh }} >
                     <Text style={[style.txtFlastList, style.itemInvisible]}>{item.TenLoai}</Text>
@@ -32,7 +33,7 @@ export default class FoodOffer extends Component {
 
     render() {
         const {
-            loaiMonAn = []
+            loaiMonAn = [],
         } = this.props
         return (
            

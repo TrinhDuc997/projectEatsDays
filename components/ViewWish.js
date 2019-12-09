@@ -11,7 +11,11 @@ import {
     navigation,navigate,navigationOptions
 
 } from 'react-native';
-import {apiGetData,apiGetGoodFoodDays,apiGetDishSuggestions,apiCrateNewMeal} from '../API'
+import {apiGetData,
+    apiGetGoodFoodDays,
+    apiGetDishSuggestions,
+    apiCrateNewMeal,
+    apiGetDishByCategory} from '../API'
 export default class viewWish extends Component {
 
      constructor(props) {
@@ -51,10 +55,22 @@ export default class viewWish extends Component {
     }
     
    async componentDidMount(){
-        const goodFoodDays = await apiGetGoodFoodDays();
-        this.setState({
-            goodFoodDays,
-        })
+        console.log("check this.props in viewwish:",this.props)
+        const { navigation } = this.props
+        const {state} = navigation
+        const { params } = state
+        if(!!params){
+            const dishflowCate = await apiGetDishByCategory(params.MaLoai);
+            console.log("check dishflowCate:",dishflowCate)
+            this.setState({
+                goodFoodDays:dishflowCate
+            })
+        }else{
+            const goodFoodDays = await apiGetGoodFoodDays();
+            this.setState({
+                goodFoodDays,
+            })
+        }
     }
     
 
