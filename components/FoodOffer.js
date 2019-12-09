@@ -27,7 +27,6 @@ export default class FoodOffer extends Component {
                     </ImageBackground>
                 </TouchableOpacity>
             </View>
-
         )
     }
 
