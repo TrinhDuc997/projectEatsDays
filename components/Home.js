@@ -137,7 +137,7 @@ const style = StyleSheet.create({
     },
     bgHomeHead: {
         width: '100%',
-        height:150
+        height:190
         //height: Dimensions.get('window'),
     },
     homeUp: {
@@ -151,17 +151,19 @@ const style = StyleSheet.create({
         // backgroundColor: COLOR_LIGHT_PINK,
     },
     txtTitle: {
-        fontSize: 18,
-        color: 'black',
-        paddingLeft: 5,
+        backgroundColor:'#f5072a',
+        fontSize: 20,
+        color: '#99bab8',
         fontWeight: 'bold',
-
+        height:50,
+        textAlign:'center',
     },
     homeDown: {
         flex: 6,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
+        
         // backgroundColor: COLOR_ORANGE,
     },
 });
