@@ -32,9 +32,10 @@ export default class FoodDay extends Component {
         goodFoodDays = [],
         navigation
         } = this.props
+        console.log("check item in foodDay:",item)
         return (
             <View style={style.itemFlastList}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress = {() => navigation.navigate('DetailWish',{item})}>
                     <ImageBackground style={style.imgBackground}
                         source={{ uri: item.Hinh }}>
                             <Text style={[style.txtFlastList, style.itemInvisible]}>{item.TenMonAn}</Text>

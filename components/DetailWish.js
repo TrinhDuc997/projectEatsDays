@@ -17,6 +17,7 @@ export default class Viewdemo extends Component {
         const {
             item = {}
         } = navigation.state.params
+        console.log("check item:",item)
         return (
             <View style={{
                 flex: 1,

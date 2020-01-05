@@ -66,7 +66,7 @@ app.post("/login", function(req , res){
 });
 // get good food every day
 app.get("/goodFoodDays", function(req , res){
-    var query = "select * from monan";
+    var query = "SELECT TOP 5 *  FROM MonAn ORDER BY NEWID()";
     executeQuery (res, query);
 });
 //creat new meal

@@ -22,7 +22,7 @@ export default class viewWish extends Component {
         super(props);
         this.state = {
             datas: [],
-            goodFoodDays:[]
+            dataDish:[]
             }
         }
 /**this item view */
@@ -63,25 +63,25 @@ export default class viewWish extends Component {
             const dishflowCate = await apiGetDishByCategory(params.MaLoai);
             console.log("check dishflowCate:",dishflowCate)
             this.setState({
-                goodFoodDays:dishflowCate
+                dataDish:dishflowCate
             })
         }else{
             const goodFoodDays = await apiGetGoodFoodDays();
             this.setState({
-                goodFoodDays,
+                dataDish:goodFoodDays,
             })
         }
     }
     
 
     render() {
-        const { goodFoodDays = [] } = this.state
+        const { dataDish = [] } = this.state
         return (
             <View style={style.viewWish}>
                 <FlatList style={style.flatList}
-                    data={goodFoodDays}
+                    data={dataDish}
                     renderItem={this.renderItem}
-                    keyExtractor={({ id }, index) => id}
+                    keyExtractor={({ MaMonAn }, index) => MaMonAn}
                     ItemSeparatorComponent={this.renderitemsepar}
                 />
             </View>

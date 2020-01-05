@@ -104,6 +104,7 @@ export default class abc extends Component {
                         <Text style={style.txtTitle}>Món ngon mỗi ngày</Text>
                         <FoodDay
                             goodFoodDays={this.state.goodFoodDays}
+                            navigation = {this.props.navigation}
                         >
                         </FoodDay>
 
